@@ -7,58 +7,77 @@ import {
     Box,
     Link as ChakraLink,
     useColorModeValue,
-    useColorMode,
-    Button,
 } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion';
+import { ToggleModeButton } from "../ToggleModeButton";
+import { TelegramButton } from "../TelegramButton";
 import { Logo } from '../Logo';
 import { staticRoutes } from '../../constants/routes';
 
 const backdropFilter = "saturate(180%) blur(0.35rem)";
 
+const variants = {
+    hidden: { opacity: 0, x: 0, y: -50 },
+    enter: { opacity: 1, x: 0, y: 0 },
+    exit: { opacity: 0, x: 0, y: -50 }
+}
+
+const motionProps = {
+    initial: "hidden",
+    animate: "enter",
+    exit: "exit",
+    variants,
+    transition: { duration: 1, type: 'easeInOut' },
+}
+
 const Navbar = () => {
     const router = useRouter();
     const headerBg = useColorModeValue('bg.headerBgLight', 'bg.headerBgDark');
-    const colorModeIcon = useColorModeValue(faMoon, faSun);
-    const { toggleColorMode } = useColorMode();
 
     return (
-        <Box h={['54px', '54px', '80px']} bg={headerBg} backdropFilter={backdropFilter} position="fixed" top="0" left="0" w="full">
-            <Container maxW="container.xl" as="header" h="full">
-                <Flex alignItems="center" justifyContent="space-between" h="full">
-                    <Flex alignItems="center" h="full">
-                        <Box mr="10">
-                            <Logo />
-                        </Box>
-                        <Flex as="nav" h="full">
-                            {staticRoutes.map(({ label, path }) => {
-                                const variant = router.pathname === path ? "navbarActive" : "navbar";
+        <motion.div
+            style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }}
+            {...motionProps}
+        >
+            <Box
+                boxShadow="sm"
+                h={['54px', '54px', '80px']}
+                bg={headerBg}
+                backdropFilter={backdropFilter}
+            >
+                <Container maxW="container.xl" as="header" h="full">
+                    <Flex alignItems="center" justifyContent="space-between" h="full">
+                        <Flex alignItems="center" h="full">
+                            <Box mr="10">
+                                <Logo />
+                            </Box>
+                            <Flex as="nav" h="full" display={['none', 'none', 'flex', 'flex']}>
+                                {staticRoutes.map(({ label, path }) => {
+                                    const variant = router.pathname === path ? "navbarActive" : "navbar";
 
-                                return (
-                                    <Link href={path}>
-                                        <ChakraLink variant={variant} ml="2">
-                                            {label}
-                                        </ChakraLink>
-                                    </Link>
-                                );
-                            })}
+                                    return (
+                                        <Link href={path} key={path}>
+                                            <ChakraLink variant={variant} ml="2">
+                                                {label}
+                                            </ChakraLink>
+                                        </Link>
+                                    );
+                                })}
+                            </Flex>
+                        </Flex>
+                        <Flex alignItems="center">
+                            <Box mr="5" display={["none", "none", "none", "block"]}>
+                                <TelegramButton />
+                            </Box>
+                            <Box>
+                                <ToggleModeButton />
+                            </Box>
                         </Flex>
                     </Flex>
-                    <Box>
-                        <Button
-                            w="48px"
-                            h="48px"
-                            variant="ghost"
-                            onClick={toggleColorMode}
-                        >
-                            <FontAwesomeIcon icon={colorModeIcon} />
-                        </Button>
-                    </Box>
-                </Flex>
-            </Container>
-        </Box>
-    )
+                </Container>
+            </Box>
+        </motion.div>
+    );
 }
 
 export default Navbar;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Text, Link as ChakraLink, useColorModeValue } from '@chakra-ui/react';
+import { Heading, Link as ChakraLink, useColorModeValue, Text } from '@chakra-ui/react';
 
 const Logo = () => {
     const authorNameColor = useColorModeValue('gray.500', 'gray.500');
@@ -8,9 +8,9 @@ const Logo = () => {
     return (
         <Link href="/">
             <ChakraLink _hover={{ textDecoration: "none" }}>
-                <Text color="green.400" textTransform="uppercase" fontWeight="bold" fontSize={['md', 'md', 'xl']}>
+                <Heading color="green.400" textTransform="uppercase" fontWeight="bolder" fontSize={['md', 'md', 'xl']}>
                     karardzhikov.dev
-                </Text>
+                </Heading>
                 <Text fontSize={["sm", "sm", "md"]} color={authorNameColor}>
                     александр караджиков
                 </Text>

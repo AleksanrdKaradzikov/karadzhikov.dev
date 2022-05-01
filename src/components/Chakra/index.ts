@@ -1,0 +1,1 @@
+export { default as Chakra, getServerSideProps } from './Chakra';

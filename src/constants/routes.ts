@@ -12,3 +12,9 @@ export const staticRoutes = [
         label: 'Работы'
     }
 ];
+
+export const staticTitles = {
+    about: 'Об авторе',
+    blog: 'Статьи',
+    works: 'Работы',
+}

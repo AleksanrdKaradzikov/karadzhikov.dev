@@ -8,4 +8,9 @@ const config: ThemeConfig = {
     useSystemColorMode: false,
 };
 
-export const theme = extendTheme({ colors, styles, config, components });
+export const theme = extendTheme({
+    colors, styles, config, components, fonts: {
+        heading: "'Open Sans', sans-serif",
+        body: "'Roboto', sans-serif",
+    }
+});

@@ -1,19 +1,38 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider, Box, Container } from '@chakra-ui/react';
-import { Navbar } from '../src/components/Navbar';
-import { theme } from '../src/constants/theme';
+import { AnimatePresence } from 'framer-motion'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { Chakra } from '../src/components/Chakra';
+import { MainLayout } from '../src/components/Layouts/MainLayout';
+import { Fonts } from '../src/components/Fonts';
 import '../styles/globals.css'
 
-function MyApp({ Component, pageProps }: AppProps) {
+config.autoAddCss = false
+
+if (typeof window !== 'undefined') {
+  window.history.scrollRestoration = 'manual';
+}
+
+const onExitComplete = () => {
+  if (typeof window !== 'undefined') {
+    window.scrollTo({ top: 0 });
+  }
+};
+
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
-    <ChakraProvider theme={theme}>
-      <Navbar />
-      <Box as="main" pt={['60px', '60px', '80px']}>
-        <Container maxW="container.xl">
-          <Component {...pageProps} />
-        </Container >
-      </Box>
-    </ChakraProvider>
+    <Chakra cookies={pageProps.cookies}>
+      <Fonts />
+      <MainLayout>
+        <AnimatePresence
+          exitBeforeEnter
+          initial={true}
+          onExitComplete={onExitComplete}
+        >
+          <Component {...pageProps} key={router.route} />
+        </AnimatePresence>
+      </MainLayout>
+    </Chakra>
   );
 }
 
