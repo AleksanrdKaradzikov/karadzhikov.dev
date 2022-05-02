@@ -40,7 +40,7 @@ const Navbar = () => {
             {...motionProps}
         >
             <Box
-                boxShadow="sm"
+                boxShadow="base"
                 h={['54px', '54px', '80px']}
                 bg={headerBg}
                 backdropFilter={backdropFilter}
@@ -52,8 +52,8 @@ const Navbar = () => {
                                 <Logo />
                             </Box>
                             <Flex as="nav" h="full" display={['none', 'none', 'flex', 'flex']}>
-                                {staticRoutes.map(({ label, path }) => {
-                                    const variant = router.pathname === path ? "navbarActive" : "navbar";
+                                {staticRoutes.slice(1).map(({ label, path }) => {
+                                    const variant = router.pathname.includes(path) ? "navbarActive" : "navbar";
 
                                     return (
                                         <Link href={path} key={path}>

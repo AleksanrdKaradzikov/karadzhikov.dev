@@ -65,7 +65,7 @@ const Footer = () => {
                                 <Box
                                     _hover={{ transform: 'scale(1.2)' }}
                                     color={useColorModeValue(lightColor, darkColor)}
-                                    key={icon.toString()}
+                                    key={label}
                                     transition="transform .3s ease"
                                     fontSize="30px"
                                     ml="5"

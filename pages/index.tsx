@@ -17,9 +17,8 @@ const Home: NextPage = () => {
           md: 'repeat(1, 1fr)',
           lg: 'repeat(3, 1fr)'
         }}
-        p={{
-          md: '100px 0 160px'
-        }}>
+        p="100px 0 160px"
+      >
         <GridItem
           boxShadow='dark-lg'
           transition="transform .3s ease"

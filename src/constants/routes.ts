@@ -1,20 +1,31 @@
+export const mapPathToLabel = {
+    '/': 'Главная',
+    'blog': 'Статьи',
+    'about': 'Об авторе',
+    'works': 'Работы',
+} as Record<string, string>;
+
 export const staticRoutes = [
     {
+        path: '/',
+        label: mapPathToLabel['/'],
+    },
+    {
         path: '/blog',
-        label: 'Статьи'
+        label: mapPathToLabel.blog
     },
     {
         path: '/about',
-        label: 'Об авторе'
+        label: mapPathToLabel.about
     },
     {
         path: '/works',
-        label: 'Работы'
-    }
+        label: mapPathToLabel.works
+    },
 ];
 
 export const staticTitles = {
-    about: 'Об авторе',
-    blog: 'Статьи',
-    works: 'Работы',
+    about: mapPathToLabel.about,
+    blog: mapPathToLabel.blog,
+    works: mapPathToLabel.works,
 }
