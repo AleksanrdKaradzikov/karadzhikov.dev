@@ -1,20 +1,48 @@
-import Link from 'next/link';
-import { Link as ChakraLink } from '@chakra-ui/react';
+import { GetStaticProps } from 'next';
 import { Layout } from "../../src/components/Layouts/AnimateLayout";
+import { fetchAPI } from '../../src/services/strapiApi';
 import { staticTitles } from '../../src/constants/routes';
+import { ArticleToRender, MetaPagination, Category } from '../../src/models';
+import { BlogPageLayout } from '../../src/components/Layouts/BlogPageLayout';
+import { formatArticlesToRender, formatCategoryToRender } from '../../src/helpers';
 
-export default function BlogPage() {
+interface Props {
+    articles: ArticleToRender[];
+    categories: Category[];
+    pagination: MetaPagination,
+};
+
+export default function BlogPage({ articles, categories, pagination }: Props) {
+    console.log('articles: ', articles);
+    console.log('categories: ', categories);
+    console.log('pagination: ', pagination);
+
     return (
         <Layout title={staticTitles.blog}>
-            <Link href="/blog/articleName">
-                <ChakraLink>
-                    ChakraLink
-                </ChakraLink>
-            </Link>
-            <div>
-                Статьи
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum consequatur sed blanditiis, corporis quidem necessitatibus minima culpa possimus accusamus, sit sint debitis doloribus magni neque perferendis temporibus omnis aut odio enim reprehenderit fugiat! Quia suscipit tempora voluptates doloribus. Officia est ab optio eveniet. Est, facilis eius neque eos delectus impedit modi aspernatur error doloribus repudiandae optio ipsa velit quas sit rem libero commodi tenetur cumque autem deleniti ut non iusto esse amet? Atque voluptatem modi, laboriosam dolore possimus ad iusto incidunt nam facilis esse alias itaque dignissimos labore minima provident distinctio suscipit accusamus porro consequuntur quos magnam reiciendis perspiciatis fuga impedit! Provident officia deserunt, voluptate magni quis eos eius ullam illum. Nisi blanditiis quo rerum in magnam culpa cumque sapiente, earum laboriosam explicabo reprehenderit numquam unde sit voluptates repellendus corrupti, porro dignissimos aliquam minima cum, odio quibusdam? Omnis pariatur eos, veniam modi quia consequuntur voluptates quis temporibus repellat facere quibusdam deserunt architecto labore voluptas laborum fugiat quae maiores nemo? Modi esse dicta sed quis accusamus non assumenda nisi ipsa corporis quae. Deleniti quidem rerum id? Veniam praesentium repudiandae eaque velit cum quo nemo minima. Eum ducimus suscipit velit laboriosam. Porro modi sint voluptatibus voluptatum iusto quibusdam officiis, officia, ratione rerum, architecto repudiandae rem aspernatur nihil omnis dolorum facilis corrupti quaerat. Qui ut expedita aliquid culpa recusandae obcaecati omnis quam quia saepe sequi? Earum iure at totam, incidunt magnam laboriosam alias obcaecati consectetur fugiat nostrum tempore quia numquam amet dolores mollitia consequuntur accusantium saepe! Nobis, beatae eveniet quisquam quae totam autem, placeat perferendis ipsum voluptates voluptas consequuntur facilis error. Nemo et reprehenderit perspiciatis temporibus aperiam, fuga dolor dolore deserunt magnam. Veritatis voluptatibus ducimus voluptatum culpa, sint unde beatae est corporis, modi, accusantium nam? Doloremque asperiores tempora, laborum nihil, fugit ratione eius commodi consequatur aperiam quisquam molestiae minus! Tempore, tenetur! At, nam commodi. Explicabo laborum vero nisi ad? Pariatur minima, optio sapiente dignissimos tempora ipsum sed dolorum? Animi alias inventore a placeat quos officia, omnis voluptatibus sed earum fugiat nihil culpa error dicta ex enim nisi? Necessitatibus eligendi voluptatibus optio labore, odit doloribus. Ab velit atque illum nobis dolor corporis aliquid accusamus. Dolorum iste facilis incidunt architecto in eum, perferendis cupiditate autem. Amet in voluptatibus vel ipsam optio totam, quidem quisquam numquam iste nulla tempora quod modi quaerat minima enim ipsa cumque deleniti ipsum aspernatur rem! Nulla eos iste recusandae distinctio neque, odit magni eius cupiditate dignissimos est eveniet, perferendis dolores. Iste modi vitae quidem quo provident animi culpa magnam, neque, tempora nesciunt explicabo minima sunt voluptatem nemo aliquam consequuntur, adipisci eos? Dicta nobis velit quidem praesentium sapiente odio aspernatur laudantium eveniet at perferendis reiciendis animi quae id natus hic recusandae illum, fuga, unde similique laborum eaque ad suscipit? Nihil inventore labore praesentium provident dolor, reprehenderit quas beatae. Dicta reiciendis hic veritatis dolores, iste atque numquam, eveniet distinctio nisi magni, tempore vitae tenetur amet. Dolorem, rem. Cupiditate quibusdam quisquam sapiente. Tenetur vel alias dolore modi ex molestias qui! Ratione, temporibus at. Eum eos perferendis incidunt beatae, ea sit consequatur animi soluta qui vero aperiam, natus in fuga? Pariatur iure cumque sunt hic praesentium, soluta enim possimus assumenda omnis animi, architecto inventore quis mollitia rem numquam, voluptas totam culpa. Unde commodi cum laborum cumque quo vel illum dicta omnis numquam eveniet accusantium esse ea quos est nisi, nam voluptatem fuga magni voluptas iure quasi perspiciatis. Velit nisi aliquid sequi perspiciatis laudantium iusto vel nihil assumenda ab placeat provident, ratione facilis perferendis voluptatem minima illum reiciendis inventore corrupti officia. Sed corrupti, placeat iure quas doloremque ipsam, ea excepturi veniam blanditiis non sapiente laborum praesentium natus, reprehenderit accusamus ex possimus officiis molestiae recusandae architecto nam velit? Illum excepturi eius repellendus ipsa ducimus laborum dolore ipsam necessitatibus libero vero. Voluptates deleniti distinctio odio quia provident dolore dolorum laboriosam! Consectetur repellendus delectus eligendi. Voluptatibus sed nesciunt doloribus nemo! Vero perspiciatis quam numquam iusto dolorem, quia quisquam ex natus perferendis fuga, asperiores enim minima maxime labore soluta reiciendis dolores sequi repellendus doloribus culpa, voluptatem odio. Atque aliquid, magni sunt quibusdam nihil consequuntur ex perspiciatis, alias debitis aliquam, placeat sequi. At sunt animi eos sint exercitationem nesciunt consequatur placeat ea accusantium, nisi, veritatis tempora libero accusamus fugiat aliquid debitis doloribus, aperiam porro unde nobis ad ullam itaque aliquam nostrum. Explicabo, dicta. Quae facere voluptas laudantium atque velit cupiditate quasi, placeat pariatur dolorum! Quae placeat quia sapiente soluta nisi dolorem sunt aperiam. Quod dolorem distinctio aperiam nihil neque corrupti voluptatem, omnis architecto blanditiis veritatis aut quibusdam ipsam, minima animi dolorum amet exercitationem modi culpa id eaque doloremque tenetur mollitia similique odio! Vero minima, recusandae aut cum iure cumque nisi, eligendi quod iste sunt dolorem pariatur in impedit quidem rerum odio sapiente enim nihil. Harum commodi, a quidem doloremque velit laboriosam dolorum labore deleniti, quos ad hic nisi sapiente dolores minima odit iure saepe nihil. Quam dicta nostrum, itaque veniam sed facilis sapiente non obcaecati exercitationem ad maxime deserunt. Ducimus ratione magni veritatis, neque consequuntur recusandae iure quisquam sed explicabo, eius optio unde soluta assumenda enim minima nesciunt voluptates? Omnis aliquid autem vel est error praesentium debitis! Molestias sed doloremque ex. Quia ipsam, nisi dolore facere sed adipisci libero vel assumenda labore ipsa molestiae impedit vero autem nihil corporis quod animi laudantium architecto reiciendis, facilis, numquam mollitia. Accusantium blanditiis aliquid rem temporibus quibusdam, recusandae ullam suscipit voluptatibus animi sapiente non quasi placeat enim soluta autem dignissimos laborum vero porro earum sunt vel sequi ab. Laborum modi repellat totam, eligendi eos perferendis rem, culpa exercitationem deleniti illum error reprehenderit cupiditate nulla fuga, maxime quasi vel quisquam et! Voluptates amet error similique minus hic qui omnis et, placeat est velit, accusantium voluptas facere iusto natus voluptatum consectetur dicta animi rem a nesciunt? Dolore, dolores atque dicta quas libero culpa repellendus repudiandae aliquid ipsum maxime quod nihil, natus fugit blanditiis doloribus aspernatur nulla minus reiciendis fugiat voluptatem, quidem impedit vero corporis quae! Quasi similique aut voluptatem laboriosam reiciendis nisi vitae repudiandae deleniti neque esse recusandae quae possimus, iste est quod minima, commodi laudantium officia, ducimus fuga animi ratione magnam reprehenderit. Nihil incidunt voluptatibus harum!
-            </div>
+            <BlogPageLayout 
+                articles={articles}
+            />
         </Layout>
     );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    const [articles, categories] = await Promise.all([
+        fetchAPI('/articles', {
+            populate: ['author', 'image', 'categories', 'categories.categoryIcon',],
+            fields: ['title', 'slug', 'description'],
+        }),
+        fetchAPI('/categories'),
+    ]);
+
+    const formatArticels = formatArticlesToRender(articles?.data || []);
+    const formatCategories = formatCategoryToRender(categories?.data || []);
+
+    return {
+        props: {
+            articles: JSON.parse(JSON.stringify(formatArticels)),
+            categories: formatCategories,
+            pagination: articles.meta.pagination,
+        }
+    }
 }

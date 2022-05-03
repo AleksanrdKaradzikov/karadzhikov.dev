@@ -1,4 +1,3 @@
-import { Container } from "@chakra-ui/react";
 import { Layout } from "../../../src/components/Layouts/AnimateLayout";
 import { Breadcrumbs } from '../../../src/components/Breadcrumbs';
 import { useBreadcrumbsPaths } from '../../../src/hooks/useBreadcrumbs';
@@ -12,9 +11,7 @@ const ArticlePage = () => {
     const breadcrumbs = useBreadcrumbsPaths();
     return (
         <Layout>
-            <Container maxW="container.xl" mt="10">
-                <Breadcrumbs dinamicParams={params} breadcrumbs={breadcrumbs} />
-            </Container>
+            <Breadcrumbs dinamicParams={params} breadcrumbs={breadcrumbs} />
         </Layout>
     )
 };

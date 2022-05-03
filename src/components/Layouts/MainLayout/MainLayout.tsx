@@ -3,12 +3,16 @@ import Head from 'next/head';
 import { Box, Container } from '@chakra-ui/react';
 import { Navbar } from '../../Navbar';
 import { Footer } from '../../Footer';
+import { useStrapiApiGlobalContext } from '../../../../pages/_app';
+import { getStrapiMedia } from '../../../services/strapiMedia';
 
 interface Props {
     children: React.ReactNode;
 }
 
 const MainLayout: FC<Props> = ({ children }) => {
+    const context = useStrapiApiGlobalContext();
+
     return (
         <Box
             as="main"
@@ -17,10 +21,13 @@ const MainLayout: FC<Props> = ({ children }) => {
         >
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content="Karadzhikov Aleksandr homepage" />
+                <meta name="description" content="Karadzhikov Aleksandr главная" />
                 <meta name="author" content="Karadzhikov Aleksandr" />
                 <meta name="author" content="Karadzhikov.dev" />
-                <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+                <link
+                    rel="shortcut icon"
+                    href={getStrapiMedia(context.favicon)}
+                />
                 <title>Karadzhikov.dev - Главная</title>
             </Head>
             <Navbar />

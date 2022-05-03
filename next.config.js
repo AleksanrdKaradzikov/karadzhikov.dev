@@ -5,6 +5,10 @@ const nextConfig = {
     locales: ['en-US', 'ru'],
     defaultLocale: 'ru',
   },
+  images: {
+    loader: "default",
+    domains: ["localhost"],
+  },
 }
 
 module.exports = nextConfig
