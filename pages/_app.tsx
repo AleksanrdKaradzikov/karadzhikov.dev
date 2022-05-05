@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { AppProps, AppContext } from 'next/app'
+import NextNProgress from "nextjs-progressbar";
 import App from 'next/app';
 import { AnimatePresence } from 'framer-motion'
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -32,19 +33,19 @@ export function useStrapiApiGlobalContext() {
 }
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  const { global } = pageProps;
+  const { global = {} } = pageProps;
 
   return (
     <Chakra cookies={pageProps.cookies}>
+      <NextNProgress color="#48BB78" showOnShallow={false} />
       <Fonts />
-      <StrapiApiGlobalContext.Provider value={global.attributes}>
+      <StrapiApiGlobalContext.Provider value={global?.attributes ?? {}}>
         <MainLayout>
           <AnimatePresence
             exitBeforeEnter
             initial={true}
             onExitComplete={onExitComplete}
           >
-
             <Component {...pageProps} key={router.route} />
           </AnimatePresence>
         </MainLayout>
@@ -65,7 +66,7 @@ MyApp.getInitialProps = async (ctx: AppContext) => {
     },
   });
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { global: globalRes.data } };
+  return { ...appProps, pageProps: { global: globalRes.data, ...appProps.pageProps } };
 }
 
 export default MyApp

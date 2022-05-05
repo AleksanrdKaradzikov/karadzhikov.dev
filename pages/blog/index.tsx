@@ -1,4 +1,6 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Layout } from "../../src/components/Layouts/AnimateLayout";
 import { fetchAPI } from '../../src/services/strapiApi';
 import { staticTitles } from '../../src/constants/routes';
@@ -13,24 +15,37 @@ interface Props {
 };
 
 export default function BlogPage({ articles, categories, pagination }: Props) {
-    console.log('articles: ', articles);
-    console.log('categories: ', categories);
-    console.log('pagination: ', pagination);
+    const { isReady, push } = useRouter();
+
+    useEffect(() => {
+        if (isReady && articles.length === 0) {
+            push('/blog');
+        }
+    }, [isReady, push, articles])
 
     return (
         <Layout title={staticTitles.blog}>
-            <BlogPageLayout 
+            <BlogPageLayout
                 articles={articles}
+                categories={categories}
+                pagination={pagination}
             />
         </Layout>
     );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+    const { page = 1, pageSize = 3 } = query;
+
     const [articles, categories] = await Promise.all([
         fetchAPI('/articles', {
-            populate: ['author', 'image', 'categories', 'categories.categoryIcon',],
-            fields: ['title', 'slug', 'description'],
+            populate: ['author', 'author.avatar', 'image', 'categories', 'categories.categoryIcon',],
+            fields: ['title', 'slug', 'description', 'publishedAt'],
+            sort: ['createdAt:desc'],
+            pagination: {
+                page,
+                pageSize,
+            }
         }),
         fetchAPI('/categories'),
     ]);
@@ -41,8 +56,8 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
         props: {
             articles: JSON.parse(JSON.stringify(formatArticels)),
-            categories: formatCategories,
+            categories: JSON.parse(JSON.stringify(formatCategories)),
             pagination: articles.meta.pagination,
-        }
+        },
     }
 }

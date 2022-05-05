@@ -1,38 +1,67 @@
 import React, { FC } from 'react';
-import { Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
-import { BlogList } from '../../BlogList';
-import { ArticleToRender } from '../../../models/articleModel';
+import {
+    Grid,
+    GridItem,
+    useBreakpointValue,
+    Box,
+    useColorModeValue,
+    Heading,
+} from '@chakra-ui/react';
+import { BlogList, TagList } from '../../BlogList';
+import { BlogPagination } from '../../BlogPagination';
+import { ArticleToRender, Category, MetaPagination } from '../../../models';
 
 interface Props {
     articles: ArticleToRender[];
+    categories: Category[];
+    pagination?: MetaPagination,
+    currentCategory?: string
 }
 
-const BlogPageLayout: FC<Props> = ({ articles }) => {
-    const leftBarShow = useBreakpointValue({ base: false, md: false, lg: true });
+const BlogPageLayout: FC<Props> = ({ articles, categories, pagination, currentCategory }) => {
+    const leftBarShow = useBreakpointValue({ base: false, md: true, lg: true });
+    const mobileTagsShow = useBreakpointValue({ base: true, md: false, lg: false });
+    const tagsBlockBg = useColorModeValue('white', 'bg.headerBgDark');
+    const showPagination = pagination && pagination.pageCount > 1;
 
     return (
-        <Grid
-            pt="32px"
-            gridTemplateColumns={{
-                base: '1fr',
-                md: '1f',
-                lg: '1fr 300px'
-            }}
-            gridGap="32px"
-        >
-            <GridItem
-                display="grid"
-                alignSelf="start"
-                gridGap="30px"
+        <Box>
+            <Heading pt="32px" color="green.400">
+                Статьи{currentCategory ? `: ${currentCategory}` : ''}
+            </Heading>
+            <Grid
+                pt="32px"
+                gridTemplateColumns={{
+                    base: '1fr',
+                    md: '1fr',
+                    lg: '1fr 300px'
+                }}
+                gridGap="32px"
             >
-                <BlogList articles={articles} />
-            </GridItem>
-            {leftBarShow && (
-                <GridItem>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, quibusdam blanditiis assumenda velit natus eaque dolore, sunt aliquam aliquid enim hic quam vero! Est, provident! Esse eaque provident cupiditate quod sint illum rerum ullam. Doloremque ad quam possimus enim quisquam delectus officiis veniam unde accusantium perspiciatis non dolor at similique, provident inventore quia fugiat perferendis. Reprehenderit ipsum, optio quidem blanditiis aut debitis sequi sunt earum incidunt corporis ipsam modi inventore dolor sed excepturi odio maxime voluptatem vitae fugit, magni possimus velit officia? Esse earum, temporibus, ut quae voluptates sunt in perspiciatis nesciunt modi rem nihil officia facere porro maxime pariatur!
+                <GridItem
+                    display="grid"
+                    alignSelf="start"
+                    gridGap="30px"
+                >
+                    {mobileTagsShow && (
+                        <Box bg={tagsBlockBg} p="24px" boxShadow="base" borderRadius="6px">
+                            <TagList items={categories} />
+                        </Box>
+                    )}
+                    <BlogList articles={articles} />
+                    {showPagination && (
+                        <BlogPagination pagination={pagination as MetaPagination} />
+                    )}
                 </GridItem>
-            )}
-        </Grid>
+                {leftBarShow && (
+                    <GridItem>
+                        <Box bg={tagsBlockBg} p="24px" boxShadow="base" borderRadius="6px">
+                            <TagList items={categories} />
+                        </Box>
+                    </GridItem>
+                )}
+            </Grid>
+        </Box>
     );
 }
 

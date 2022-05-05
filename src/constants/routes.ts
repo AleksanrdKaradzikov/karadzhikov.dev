@@ -1,8 +1,9 @@
 export const mapPathToLabel = {
     '/': 'Главная',
-    'blog': 'Статьи',
-    'about': 'Об авторе',
-    'works': 'Работы',
+    blog: 'Статьи',
+    about: 'Об авторе',
+    works: 'Работы',
+    category: 'Категории',
 } as Record<string, string>;
 
 export const staticRoutes = [
@@ -28,4 +29,5 @@ export const staticTitles = {
     about: mapPathToLabel.about,
     blog: mapPathToLabel.blog,
     works: mapPathToLabel.works,
+    category: mapPathToLabel.category,
 }

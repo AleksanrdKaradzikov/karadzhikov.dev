@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 
 const variants = {
@@ -15,9 +16,11 @@ interface Props {
 
 const Layout: FC<Props> = ({ children, title }) => {
     let ttl = `${title} - Karadzhikov.dev`;
+    const { pathname } = useRouter();
 
     return (
         <motion.div
+            key={pathname}
             initial="hidden"
             animate="enter"
             exit="exit"
