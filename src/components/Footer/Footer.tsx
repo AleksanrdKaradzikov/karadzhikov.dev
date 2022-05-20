@@ -1,5 +1,14 @@
 import React from 'react';
-import { Box, Container, Flex, Text, Link, useColorModeValue, Tooltip } from '@chakra-ui/react';
+import {
+    Grid,
+    Box,
+    GridItem,
+    Container,
+    Text,
+    Link,
+    Tooltip,
+    useColorMode
+} from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTelegram, faVk, faWhatsapp, faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -34,37 +43,48 @@ const links = [
     }
 ];
 
+
+
 const Footer = () => {
+    const { colorMode } = useColorMode();
+
     return (
         <Box
+            as="footer"
             py="60px"
             mt="auto"
             minHeight="50px"
             width="100%"
         >
             <Container maxWidth="container.xl">
-                <Flex justifyContent="space-between" alignItems="center">
-                    <Box>
+                <Grid
+                    gridTemplateColumns={{
+                        base: '1fr',
+                        md: '1fr',
+                        lg: '1fr 1fr',
+                    }}
+                >
+                    <GridItem
+                        textAlign={{ base: 'center', md: 'center', lg: 'left' }}
+                        mb={{ base: '20px', md: '20px', lg: 0 }}>
                         <Text>Дизайн и разработка Александра Караджикова</Text>
                         <Text>
                             Copyrighting © {new Date().getFullYear()}. Построен с {' '}
                             <Link
                                 target="blank"
-                                _active={{ boxShadow: 'none' }}
-                                _focus={{ boxShadow: 'none' }}
                                 color="teal.500"
                                 href="https://nextjs.org/"
                             >
                                 Next.js
                             </Link>
                         </Text>
-                    </Box>
-                    <Box display="flex">
+                    </GridItem>
+                    <GridItem display="flex" justifyContent={{ base: 'center', md: 'center', lg: 'flex-end' }}>
                         {links.map(({ href, icon, lightColor, darkColor, label }) => {
                             return (
                                 <Box
                                     _hover={{ transform: 'scale(1.2)' }}
-                                    color={useColorModeValue(lightColor, darkColor)}
+                                    color={colorMode === 'dark' ? darkColor : lightColor}
                                     key={label}
                                     transition="transform .3s ease"
                                     fontSize="30px"
@@ -78,8 +98,8 @@ const Footer = () => {
                                 </Box>
                             );
                         })}
-                    </Box>
-                </Flex>
+                    </GridItem>
+                </Grid>
             </Container>
         </Box>
     );

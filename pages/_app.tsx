@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { AppProps, AppContext } from 'next/app'
+import Error from './_error';
 import NextNProgress from "nextjs-progressbar";
 import App from 'next/app';
 import { AnimatePresence } from 'framer-motion'
@@ -9,6 +10,7 @@ import { Chakra } from '../src/components/Chakra';
 import { fetchAPI } from '../src/services/strapiApi';
 import { MainLayout } from '../src/components/Layouts/MainLayout';
 import { Fonts } from '../src/components/Fonts';
+
 import '../styles/globals.css'
 
 config.autoAddCss = false
@@ -33,7 +35,7 @@ export function useStrapiApiGlobalContext() {
 }
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  const { global = {} } = pageProps;
+  const { global = {}, err } = pageProps;
 
   return (
     <Chakra cookies={pageProps.cookies}>
@@ -46,27 +48,41 @@ function MyApp({ Component, pageProps, router }: AppProps) {
             initial={true}
             onExitComplete={onExitComplete}
           >
-            <Component {...pageProps} key={router.route} />
+            {err ?
+              <Error statusCode={500} />
+              :
+              <Component {...pageProps} key={router.route} />
+            }
           </AnimatePresence>
         </MainLayout>
       </StrapiApiGlobalContext.Provider>
-    </Chakra>
+    </Chakra >
   );
 }
 
 MyApp.getInitialProps = async (ctx: AppContext) => {
   const appProps = await App.getInitialProps(ctx);
   // Fetch global site settings from Strapi
-  const globalRes = await fetchAPI("/global", {
-    populate: {
-      favicon: "*",
-      defaultSeo: {
-        populate: "*",
+  try {
+    const globalRes = await fetchAPI("/global", {
+      populate: {
+        favicon: "*",
+        defaultSeo: {
+          populate: "*",
+        },
       },
-    },
-  });
-  // Pass the data to our page via props
-  return { ...appProps, pageProps: { global: globalRes.data, ...appProps.pageProps } };
+    });
+    // Pass the data to our page via props
+    return { ...appProps, pageProps: { global: globalRes.data, ...appProps.pageProps } };
+  } catch {
+    return {
+      ...appProps,
+      pageProps: {
+        ...appProps.pageProps,
+        err: true,
+      }
+    }
+  }
 }
 
 export default MyApp

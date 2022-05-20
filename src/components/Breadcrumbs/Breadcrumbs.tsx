@@ -10,11 +10,10 @@ import {
 } from '@chakra-ui/react';
 
 interface Props {
-    dinamicParams?: Record<string, string>;
-    breadcrumbs: { path: string, label: string; isRoot?: boolean }[];
+    breadcrumbs: { path?: string; isRoot?: boolean; label: string; }[];
 }
 
-const Breadcrumbs: FC<Props> = ({ dinamicParams = {}, breadcrumbs }) => {
+const Breadcrumbs: FC<Props> = ({ breadcrumbs }) => {
     const bg = useColorModeValue('bg.headerBgLight', 'bg.headerBgDark');
     const renderBreadcrumbs = useRef(breadcrumbs);
 
@@ -23,39 +22,28 @@ const Breadcrumbs: FC<Props> = ({ dinamicParams = {}, breadcrumbs }) => {
             bg={bg}
             boxShadow="base"
             borderRadius="6px"
-            p="2"
+            p={{ base: '8px', md: '16px', lg: '16px' }}
         >
             <Breadcrumb separator='/'>
                 {renderBreadcrumbs.current.map(({ label, path, isRoot }) => {
-                    let renderLabel = label;
-                    let renderHref = path;
-
-                    if (renderLabel.startsWith('[')) {
-                        const regExp = /\w+/g;
-
-                        renderLabel = renderLabel.replace(regExp, function (param) {
-                            const dinamicPath = dinamicParams[param];
-                            return dinamicParams[dinamicPath];
-                        }).replace('[', '').replace(']', '');
-
-                        renderHref = renderHref.replace(regExp, function (word) {
-                            if (dinamicParams[word]) {
-                                return dinamicParams[word]
-                            }
-                            return word;
-                        }).replace('[', '').replace(']', '');
-                    }
-
                     return (
-                        <BreadcrumbItem key={path}>
+                        <BreadcrumbItem key={label}>
                             {isRoot ? (
-                                <Text d="inline-block" fontWeight="500" userSelect="none">{renderLabel}</Text>
+                                <Text d="inline-block" fontWeight="500" userSelect="none">{label}</Text>
                             ) : (
-                                <Link href={renderHref}>
-                                    <BreadcrumbLink color="green.400">
-                                        {renderLabel}
-                                    </BreadcrumbLink>
-                                </Link>
+                                <>
+                                    {path && (
+                                        <Link href={path} passHref>
+                                            <BreadcrumbLink
+                                                color="green.400"
+                                                _active={{ boxShadow: 'none' }}
+                                                _focus={{ boxShadow: 'none' }}
+                                            >
+                                                {label}
+                                            </BreadcrumbLink>
+                                        </Link>
+                                    )}
+                                </>
                             )}
                         </BreadcrumbItem>
                     );

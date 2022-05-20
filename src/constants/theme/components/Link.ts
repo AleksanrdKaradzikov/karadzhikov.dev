@@ -28,6 +28,10 @@ const defaultNavbarProps = {
 }
 
 export const Link: ComponentStyleConfig = {
+    baseStyle: {
+        _active: { boxShadow: 'none' },
+        _focus: { boxShadow: 'none' },
+    },
     variants: {
         navbar: {
             ...defaultNavbarProps,
@@ -41,4 +45,11 @@ export const Link: ComponentStyleConfig = {
             }
         }
     }
+};
+
+export const BreadcrumbLink: ComponentStyleConfig = {
+    baseStyle: {
+        _active: { boxShadow: 'none' },
+        _focus: { boxShadow: 'none' },
+    },
 };

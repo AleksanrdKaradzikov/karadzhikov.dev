@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import moment from 'moment';
 import 'moment/locale/ru';
 import {
@@ -12,6 +13,7 @@ import {
     Heading,
     Image as ChakraImage,
     Text,
+    Button,
 } from '@chakra-ui/react';
 import { ArticleToRender } from '../../models';
 import { getStrapiMedia } from '../../services/strapiMedia';
@@ -31,9 +33,17 @@ interface BlogItemProps {
 
 export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
     const bg = useColorModeValue('white', 'bg.headerBgDark');
+    const router = useRouter();
+
+    const handleButton = () => {
+        router.push({
+            pathname: '/blog/[id]',
+            query: { id: item.slug },
+        });
+    }
 
     return (
-        <motion.div
+        <motion.article
             key={delay}
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -45,6 +55,7 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
                 gridTemplateColumns={{ base: "1fr", md: "1fr auto", lg: "1fr auto" }}
                 bg={bg}
                 boxShadow="base"
+                // p={{ base: '8px', md: '16px', lg: '16px' }}
                 p="24px"
                 borderRadius="6px"
                 position="relative"
@@ -88,7 +99,7 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
                     gridColumn={{ base: "span 2", md: "initial", lg: "initial" }}
                 >
                     <NextLink href={`/blog/${item.slug}`}>
-                        <Heading fontSize="xl">
+                        <Heading fontSize="2xl">
                             <Link _hover={{ textDecoration: 'none', color: 'green.400' }}>
                                 {item.title}
                             </Link>
@@ -146,8 +157,13 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
                         objectFit="cover"
                     />
                 </Box>
+                <Box gridColumn="span 2" d="flex" justifyContent="flex-end">
+                    <Button variant="outline" colorScheme="green" onClick={handleButton}>
+                        Подробнее
+                    </Button>
+                </Box>
             </Box>
-        </motion.div>
+        </motion.article>
     );
 }
 
@@ -163,7 +179,7 @@ const BlogList: FC<BlogListProps> = ({ articles }) => {
                 borderRadius="6px"
             >
                 <Heading fontSize="xl">
-                    Статьей не найдено
+                    Статьи не найдены
                 </Heading>
             </Box>
         );

@@ -26,8 +26,9 @@ export async function fetchAPI(path: string, urlParamsObject = {}, options = {})
     // Handle response
     if (!response.ok) {
         console.error(response.statusText);
-        throw new Error(`An error occured please try again`);
+        throw new Error(`An error occured please try again STATUS: ${response.status}`);
     }
+
     const data = await response.json();
     return data;
 }

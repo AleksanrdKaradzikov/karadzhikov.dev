@@ -1,33 +1,39 @@
+export const HOME = '/';
+export const ABOUT = '/about';
+export const WORKS = '/works';
+export const BLOG = '/blog';
+export const CATEGORY = `${BLOG}/category`;
+
 export const mapPathToLabel = {
-    '/': 'Главная',
-    blog: 'Статьи',
-    about: 'Об авторе',
-    works: 'Работы',
-    category: 'Категории',
+    [HOME]: 'Главная',
+    [BLOG]: 'Статьи',
+    [ABOUT]: 'Об авторе',
+    [WORKS]: 'Работы',
+    [CATEGORY]: 'Категории',
 } as Record<string, string>;
 
 export const staticRoutes = [
     {
-        path: '/',
-        label: mapPathToLabel['/'],
+        path: HOME,
+        label: mapPathToLabel[HOME],
     },
     {
-        path: '/blog',
-        label: mapPathToLabel.blog
+        path: BLOG,
+        label: mapPathToLabel[BLOG],
     },
     {
-        path: '/about',
-        label: mapPathToLabel.about
+        path: ABOUT,
+        label: mapPathToLabel[ABOUT],
     },
     {
-        path: '/works',
-        label: mapPathToLabel.works
+        path: WORKS,
+        label: mapPathToLabel[WORKS],
     },
 ];
 
 export const staticTitles = {
-    about: mapPathToLabel.about,
-    blog: mapPathToLabel.blog,
-    works: mapPathToLabel.works,
-    category: mapPathToLabel.category,
+    about: mapPathToLabel[ABOUT],
+    blog: mapPathToLabel[BLOG],
+    works: mapPathToLabel[WORKS],
+    category: mapPathToLabel[CATEGORY],
 }

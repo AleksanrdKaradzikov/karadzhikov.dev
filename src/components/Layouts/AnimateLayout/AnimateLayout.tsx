@@ -12,28 +12,27 @@ const variants = {
 interface Props {
     children: React.ReactNode;
     title?: string;
+    exitKey?: string;
 }
 
-const Layout: FC<Props> = ({ children, title }) => {
+const Layout: FC<Props> = ({ children, title, exitKey }) => {
     let ttl = `${title} - Karadzhikov.dev`;
     const { pathname } = useRouter();
 
     return (
         <motion.div
-            key={pathname}
+            key={exitKey || pathname}
             initial="hidden"
             animate="enter"
             exit="exit"
             variants={variants}
             transition={{ duration: 0.4, type: 'easeInOut' }}
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', height: '100%' }}
         >
 
             {title && (
                 <Head>
                     <title>{ttl}</title>
-                    {/* <meta name="twitter:title" content={ttl} />
-                    <meta property="og:title" content={ttl} /> */}
                 </Head>
             )}
             {children}

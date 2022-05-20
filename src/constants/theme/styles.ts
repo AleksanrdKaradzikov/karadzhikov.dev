@@ -40,6 +40,16 @@ export const styles = {
                         boxShadow: 'none',
                     }
                 }
+            },
+            '.Article-content': {
+                'img': {
+                    maxW: {
+                        base: '100%',
+                        md: '80%',
+                        lg: '80%',
+                    },
+                    margin: 'auto',
+                }
             }
         };
     }

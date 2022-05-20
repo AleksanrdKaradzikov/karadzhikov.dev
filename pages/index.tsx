@@ -1,13 +1,10 @@
 import type { NextPage } from 'next'
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { GridItem, Grid, Text, Heading, Img, Box, Link as ChakraLink } from '@chakra-ui/react';
 import { Layout } from '../src/components/Layouts/AnimateLayout'
 import homeAvatar from '../public/images/home-avatar.jpg';
 
 const Home: NextPage = () => {
-  const router = useRouter();
-  console.log(router);
   return (
     <Layout>
       <Grid

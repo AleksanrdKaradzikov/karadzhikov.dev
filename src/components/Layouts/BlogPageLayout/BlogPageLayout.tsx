@@ -4,33 +4,26 @@ import {
     GridItem,
     useBreakpointValue,
     Box,
-    useColorModeValue,
     Heading,
 } from '@chakra-ui/react';
-import { BlogList, TagList } from '../../BlogList';
-import { BlogPagination } from '../../BlogPagination';
-import { ArticleToRender, Category, MetaPagination } from '../../../models';
 
 interface Props {
-    articles: ArticleToRender[];
-    categories: Category[];
-    pagination?: MetaPagination,
-    currentCategory?: string
+    title?: string;
+    rightContent: React.ReactNode;
+    leftContent: React.ReactNode;
 }
 
-const BlogPageLayout: FC<Props> = ({ articles, categories, pagination, currentCategory }) => {
+const BlogPageLayout: FC<Props> = ({ title, rightContent, leftContent }) => {
     const leftBarShow = useBreakpointValue({ base: false, md: true, lg: true });
-    const mobileTagsShow = useBreakpointValue({ base: true, md: false, lg: false });
-    const tagsBlockBg = useColorModeValue('white', 'bg.headerBgDark');
-    const showPagination = pagination && pagination.pageCount > 1;
 
     return (
-        <Box>
-            <Heading pt="32px" color="green.400">
-                Статьи{currentCategory ? `: ${currentCategory}` : ''}
-            </Heading>
+        <Box pt="32px">
+            {title && (
+                <Heading color="green.400" mb="32px">
+                    {title}
+                </Heading>
+            )}
             <Grid
-                pt="32px"
                 gridTemplateColumns={{
                     base: '1fr',
                     md: '1fr',
@@ -43,21 +36,11 @@ const BlogPageLayout: FC<Props> = ({ articles, categories, pagination, currentCa
                     alignSelf="start"
                     gridGap="30px"
                 >
-                    {mobileTagsShow && (
-                        <Box bg={tagsBlockBg} p="24px" boxShadow="base" borderRadius="6px">
-                            <TagList items={categories} />
-                        </Box>
-                    )}
-                    <BlogList articles={articles} />
-                    {showPagination && (
-                        <BlogPagination pagination={pagination as MetaPagination} />
-                    )}
+                    {rightContent}
                 </GridItem>
                 {leftBarShow && (
                     <GridItem>
-                        <Box bg={tagsBlockBg} p="24px" boxShadow="base" borderRadius="6px">
-                            <TagList items={categories} />
-                        </Box>
+                        {leftContent}
                     </GridItem>
                 )}
             </Grid>

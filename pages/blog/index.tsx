@@ -1,11 +1,14 @@
 import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { Box, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
 import { Layout } from "../../src/components/Layouts/AnimateLayout";
 import { fetchAPI } from '../../src/services/strapiApi';
 import { staticTitles } from '../../src/constants/routes';
 import { ArticleToRender, MetaPagination, Category } from '../../src/models';
 import { BlogPageLayout } from '../../src/components/Layouts/BlogPageLayout';
+import { BlogList, TagList } from '../../src/components/BlogList';
+import { BlogPagination } from '../../src/components/BlogPagination';
 import { formatArticlesToRender, formatCategoryToRender } from '../../src/helpers';
 
 interface Props {
@@ -21,14 +24,38 @@ export default function BlogPage({ articles, categories, pagination }: Props) {
         if (isReady && articles.length === 0) {
             push('/blog');
         }
-    }, [isReady, push, articles])
+    }, [isReady, push, articles]);
+
+    const mobileTagsShow = useBreakpointValue({ base: true, md: false, lg: false });
+    const tagsBlockBg = useColorModeValue('white', 'bg.headerBgDark');
+    const showPagination = pagination && pagination.pageCount > 1;
+
+    const rightContent = (
+        <>
+            {mobileTagsShow && (
+                <Box bg={tagsBlockBg} p="24px" boxShadow="base" borderRadius="6px">
+                    <TagList items={categories} />
+                </Box>
+            )}
+            <BlogList articles={articles} />
+            {showPagination && (
+                <BlogPagination pagination={pagination as MetaPagination} />
+            )}
+        </>
+    );
+
+    const leftContent = (
+        <Box bg={tagsBlockBg} p="24px" boxShadow="base" borderRadius="6px">
+            <TagList items={categories} />
+        </Box>
+    );
 
     return (
         <Layout title={staticTitles.blog}>
             <BlogPageLayout
-                articles={articles}
-                categories={categories}
-                pagination={pagination}
+                leftContent={leftContent}
+                rightContent={rightContent}
+                title="Статьи"
             />
         </Layout>
     );
