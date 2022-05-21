@@ -24,7 +24,7 @@ const MainLayout: FC<Props> = ({ children }) => {
                     rel="shortcut icon"
                     href={getStrapiMedia(context.favicon)}
                 />
-                <title>Karadzhikov.dev - Главная</title>
+                <title>Главная - Karadzhikov.dev</title>
             </Head>
             <Box
                 pt={['60px', '60px', '80px']}

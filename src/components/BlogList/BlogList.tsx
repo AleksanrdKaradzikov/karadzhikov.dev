@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import 'moment/locale/ru';
 import {
@@ -14,10 +16,13 @@ import {
     Image as ChakraImage,
     Text,
     Button,
+    Skeleton
 } from '@chakra-ui/react';
 import { ArticleToRender } from '../../models';
 import { getStrapiMedia } from '../../services/strapiMedia';
 import { TagList } from './Tags';
+import { useVisitors } from '../../hooks/useVisitors';
+import { getItemCount } from '../../helpers/postVisitiors';
 
 moment.locale('ru');
 
@@ -32,8 +37,22 @@ interface BlogItemProps {
 }
 
 export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
+    const [visitors, setVisitors] = useVisitors();
     const bg = useColorModeValue('white', 'bg.headerBgDark');
     const router = useRouter();
+
+    useEffect(() => {
+        setVisitors({
+            ...visitors,
+            isLoading: true,
+        });
+        getItemCount(item.slug, (res) => {
+            setVisitors({
+                views: res.value,
+                isLoading: false,
+            });
+        });
+    }, [item.slug]);
 
     const handleButton = () => {
         router.push({
@@ -120,13 +139,25 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
                                 </Text>
                             </Box>
                         )}
-                        <Box>
-                            <Text>
-                                {`Дата —`}&nbsp;
-                                <Text as="span" fontWeight="600">
-                                    {moment(item.publishedAt).format('DD MMMM YYYY г.')}
-                                </Text>
-                            </Text>
+                        <Box d="flex">
+                            <Box mr="10px" color="green.400">
+                                <FontAwesomeIcon icon={faCalendar} />
+                            </Box>
+                            <Box>
+                                {moment(item.publishedAt).format('DD MMMM YYYY г.')}
+                            </Box>
+                        </Box>
+                        <Box d="flex">
+                            <Box mr="10px" color="green.400">
+                                <FontAwesomeIcon icon={faEye} />
+                            </Box>
+                            <Box>
+                                <Skeleton isLoaded={!visitors.isLoading}>
+                                    <Text>
+                                        {visitors.views}
+                                    </Text>
+                                </Skeleton>
+                            </Box>
                         </Box>
                     </Box>
                     {item.categories.length > 0 && (

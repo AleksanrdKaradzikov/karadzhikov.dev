@@ -20,23 +20,24 @@ const Layout: FC<Props> = ({ children, title, exitKey }) => {
     const { pathname } = useRouter();
 
     return (
-        <motion.div
-            key={exitKey || pathname}
-            initial="hidden"
-            animate="enter"
-            exit="exit"
-            variants={variants}
-            transition={{ duration: 0.4, type: 'easeInOut' }}
-            style={{ position: 'relative', height: '100%' }}
-        >
-
+        <>
             {title && (
                 <Head>
                     <title>{ttl}</title>
                 </Head>
             )}
-            {children}
-        </motion.div>
+            <motion.div
+                key={exitKey || pathname}
+                initial="hidden"
+                animate="enter"
+                exit="exit"
+                variants={variants}
+                transition={{ duration: 0.4, type: 'easeInOut' }}
+                style={{ position: 'relative', height: '100%' }}
+            >
+                {children}
+            </motion.div>
+        </>
     );
 }
 

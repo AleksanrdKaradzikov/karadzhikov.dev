@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import { AppProps, AppContext } from 'next/app'
 import Error from './_error';
 import NextNProgress from "nextjs-progressbar";
@@ -10,6 +10,7 @@ import { Chakra } from '../src/components/Chakra';
 import { fetchAPI } from '../src/services/strapiApi';
 import { MainLayout } from '../src/components/Layouts/MainLayout';
 import { Fonts } from '../src/components/Fonts';
+import * as gtag from '../src/helpers/gtag';
 
 import '../styles/globals.css'
 
@@ -36,6 +37,23 @@ export function useStrapiApiGlobalContext() {
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const { global = {}, err } = pageProps;
+
+  useEffect(() => {
+    let timerId: NodeJS.Timeout;
+
+    const handleRouteChange = (url: string) => {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        gtag.pageview(url, document.title);
+      }, 100);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+      clearTimeout(timerId);
+    };
+  }, []);
 
   return (
     <Chakra cookies={pageProps.cookies}>

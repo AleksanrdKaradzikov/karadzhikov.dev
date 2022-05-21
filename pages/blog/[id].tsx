@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect, useRef, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
@@ -15,6 +15,9 @@ import { TagList } from '../../src/components/BlogList';
 import { formatArticlesToRender } from '../../src/helpers';
 import { getStrapiMedia } from '../../src/services/strapiMedia';
 import { componentsMap } from '../../src/constants/markdownComponents';
+import { setItemCount, getItemCount } from '../../src/helpers/postVisitiors';
+import { VISITOR_KEY } from '../../src/constants/constants';
+import { useVisitors } from '../../src/hooks/useVisitors';
 
 const staticBreadcrumbs = [
     {
@@ -35,14 +38,51 @@ interface Props {
 }
 
 const ArticlePage: FC<Props> = ({ article, next, prev }) => {
+    const [visitors, setVisitors] = useVisitors();
     const router = useRouter();
-
+    const refId = useRef('');
     const breadcrumbs = useMemo(() => {
         return [
             ...staticBreadcrumbs,
             { isRoot: true, label: article.title }
         ];
     }, []);
+
+    useEffect(() => {
+        if (router.query.id) {
+            if (refId.current === router.query.id) {
+                return;
+            }
+
+            setVisitors({
+                ...visitors,
+                isLoading: true,
+            });
+
+            const veiwsMap = JSON.parse(localStorage.getItem(VISITOR_KEY) || '{}');
+            const queryId = router.query.id as string;
+
+            if (!veiwsMap[queryId]) {
+                refId.current = queryId;
+                setItemCount(queryId, (res) => {
+                    setVisitors({
+                        views: res.value,
+                        isLoading: false,
+                    });
+
+                    veiwsMap[queryId] = true;
+                    localStorage.setItem(VISITOR_KEY, JSON.stringify(veiwsMap));
+                });
+            } else {
+                getItemCount(queryId, (res) => {
+                    setVisitors({
+                        views: res.value,
+                        isLoading: false,
+                    });
+                });
+            }
+        }
+    }, [router.query.id]);
 
     const { title, image, publishedAt, author, slug } = article;
     const isShowTags = article.categories.length > 0;
@@ -68,6 +108,8 @@ const ArticlePage: FC<Props> = ({ article, next, prev }) => {
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
             </Box>
             <PagePreview
+                views={visitors.views}
+                viewsLoading={visitors.isLoading}
                 author={author?.name}
                 title={title}
                 date={publishedAt}

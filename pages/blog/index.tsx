@@ -62,7 +62,7 @@ export default function BlogPage({ articles, categories, pagination }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-    const { page = 1, pageSize = 3 } = query;
+    const { page = 1, pageSize = 5 } = query;
 
     const [articles, categories] = await Promise.all([
         fetchAPI('/articles', {

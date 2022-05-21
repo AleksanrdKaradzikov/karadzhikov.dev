@@ -6,8 +6,8 @@ import homeAvatar from '../public/images/home-avatar.jpg';
 
 const Home: NextPage = () => {
   return (
-    <Layout>
-      <Grid
+    <Layout title="Главная">
+      <Grid 
         gap={6}
         templateColumns={{
           base: 'repeat(1, 1fr)',
