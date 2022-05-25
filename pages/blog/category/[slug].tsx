@@ -38,6 +38,7 @@ const CategoryPage: FC<Props> = ({ category, categories, articles, }) => {
     return (
         <Layout title={`Статьи с пометкой ${category.name}`}>
             <BlogPageLayout
+                showBackBtn
                 leftContent={leftContent}
                 rightContent={rightContent}
                 title={`Статьи: ${category.name}`}

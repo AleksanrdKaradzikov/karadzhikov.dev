@@ -54,7 +54,7 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
         });
     }, [item.slug]);
 
-    const handleButton = () => {
+    const handleDetails = () => {
         router.push({
             pathname: '/blog/[id]',
             query: { id: item.slug },
@@ -172,6 +172,7 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
                     )}
                 </Box>
                 <Box
+                    onClick={handleDetails}
                     position="relative"
                     borderRadius="4px"
                     height="150px"
@@ -181,6 +182,14 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
                     gridColumn={{ base: "span 2", md: "initial", lg: "initial" }}
                     order={{ base: -1, md: "initial", lg: "initial" }}
                     overflow="hidden"
+                    sx={{
+                        '& img:hover': {
+                            transform: 'scale(1.1)',
+                        },
+                        '& img': {
+                            transition: 'all .5s ease'
+                        }
+                    }}
                 >
                     <Image
                         src={getStrapiMedia(item.image)}
@@ -189,7 +198,7 @@ export const BlogItem: FC<BlogItemProps> = ({ item, isLast, delay = 0 }) => {
                     />
                 </Box>
                 <Box gridColumn="span 2" d="flex" justifyContent="flex-end">
-                    <Button variant="outline" colorScheme="green" onClick={handleButton}>
+                    <Button variant="outline" colorScheme="green" onClick={handleDetails}>
                         Подробнее
                     </Button>
                 </Box>

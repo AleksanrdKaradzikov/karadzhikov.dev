@@ -11,17 +11,18 @@ import {
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTelegram, faVk, faWhatsapp, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { vk, telegram, github } from '../../constants/contacts';
 
 const links = [
     {
-        href: '#',
+        href: telegram,
         icon: faTelegram,
         lightColor: 'bg.telegramBg',
         darkColor: 'white',
         label: 'Телеграм',
     },
     {
-        href: '#',
+        href: vk,
         icon: faVk,
         lightColor: 'blue.500',
         darkColor: 'white',
@@ -35,15 +36,13 @@ const links = [
         label: 'WhatsApp',
     },
     {
-        href: '#',
+        href: github,
         icon: faGithub,
         lightColor: 'black',
         darkColor: 'white',
         label: 'Github',
     }
 ];
-
-
 
 const Footer = () => {
     const { colorMode } = useColorMode();
@@ -91,7 +90,7 @@ const Footer = () => {
                                     ml="5"
                                 >
                                     <Tooltip label={label} placement="top">
-                                        <Link href={href}>
+                                        <Link href={href} target="blank">
                                             <FontAwesomeIcon icon={icon} />
                                         </Link>
                                     </Tooltip>
