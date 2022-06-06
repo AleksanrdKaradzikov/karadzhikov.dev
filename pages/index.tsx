@@ -1,10 +1,13 @@
-import type { NextPage } from 'next'
+import { NextPage } from 'next'
 import Link from 'next/link';
 import { GridItem, Grid, Text, Heading, Img, Box, Link as ChakraLink } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation'
 import { Layout } from '../src/components/Layouts/AnimateLayout'
 import homeAvatar from '../public/images/home-avatar.jpg';
 
 const Home: NextPage = () => {
+  const { t } = useTranslation('home');
+
   return (
     <Layout title="Главная">
       <Grid
@@ -47,7 +50,7 @@ const Home: NextPage = () => {
             lg: 2,
           }}>
           <Text fontSize='5xl' fontWeight="500">
-            Александр Караджиков
+            {t('me')}
           </Text>
           <Heading
             as='h1'
@@ -58,15 +61,13 @@ const Home: NextPage = () => {
             fontWeight='black'
             mb="10"
           >
-            Fronted Developer
+            {t('title')}
           </Heading>
           <Text fontSize="md" mb="3">
-            Добро пожаловать! Меня зовут Александр Караджиков, я занимаюсь frontend-ом уже более 3 лет,
-            я постоянно развиваюсь в данном направлении и интересуюсь новыми трендами и технологиями.
+            {t('about_one')}
           </Text>
           <Text fontSize="md">
-            Здесь вы сможете ознакомится с моими работами, так же я виду небольшой блог на различные темы в сфере IT,
-            а так же рассказываю о своей жизни, приятного просмотра!
+            {t('about_two')}
           </Text>
         </GridItem>
       </Grid>
@@ -106,4 +107,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Home;

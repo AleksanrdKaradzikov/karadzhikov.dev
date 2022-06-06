@@ -1,20 +1,19 @@
 import { createContext, useContext, useEffect } from 'react';
 import { AppProps, AppContext } from 'next/app'
-import Error from './_error';
 import NextNProgress from "nextjs-progressbar";
 import App from 'next/app';
-import { AnimatePresence } from 'framer-motion'
-import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
+import { AnimatePresence } from 'framer-motion';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import Error from './_error';
 import { Chakra } from '../src/components/Chakra';
 import { fetchAPI } from '../src/services/strapiApi';
 import { MainLayout } from '../src/components/Layouts/MainLayout';
 import { Fonts } from '../src/components/Fonts';
 import * as gtag from '../src/helpers/gtag';
-
 import '../styles/globals.css'
 
-config.autoAddCss = false
+config.autoAddCss = false;
 
 if (typeof window !== 'undefined') {
   window.history.scrollRestoration = 'manual';
@@ -91,7 +90,13 @@ MyApp.getInitialProps = async (ctx: AppContext) => {
       },
     });
     // Pass the data to our page via props
-    return { ...appProps, pageProps: { global: globalRes.data, ...appProps.pageProps } };
+    return {
+      ...appProps,
+      pageProps: {
+        global: globalRes.data,
+        ...appProps.pageProps
+      }
+    };
   } catch {
     return {
       ...appProps,
@@ -103,4 +108,4 @@ MyApp.getInitialProps = async (ctx: AppContext) => {
   }
 }
 
-export default MyApp
+export default MyApp;

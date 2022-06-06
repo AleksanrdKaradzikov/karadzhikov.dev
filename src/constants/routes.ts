@@ -5,11 +5,11 @@ export const BLOG = '/blog';
 export const CATEGORY = `${BLOG}/category`;
 
 export const mapPathToLabel = {
-    [HOME]: 'Главная',
-    [BLOG]: 'Статьи',
-    [ABOUT]: 'Об авторе',
-    [WORKS]: 'Работы',
-    [CATEGORY]: 'Категории',
+    [HOME]: 'home',
+    [BLOG]: 'blog',
+    [ABOUT]: 'about',
+    [WORKS]: 'works',
+    [CATEGORY]: 'category',
 } as Record<string, string>;
 
 export const staticRoutes = [
