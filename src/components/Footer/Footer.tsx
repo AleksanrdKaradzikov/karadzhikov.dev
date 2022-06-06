@@ -7,7 +7,7 @@ import {
     Text,
     Link,
     Tooltip,
-    useColorMode
+    useColorMode,
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTelegram, faVk, faWhatsapp, faGithub } from '@fortawesome/free-brands-svg-icons';

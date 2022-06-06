@@ -2,9 +2,11 @@ import React from 'react';
 import { Link, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTelegram } from '@fortawesome/free-brands-svg-icons'
+import useTranslation from 'next-translate/useTranslation'
 import { telegram } from '../../constants/contacts';
 
 const TelegramButton = () => {
+    const { t } = useTranslation('common');
     return (
         <Link
             href={telegram}
@@ -22,7 +24,7 @@ const TelegramButton = () => {
             _hover={{ textDecoration: "none", bg: 'blue.500' }}
         >
             <FontAwesomeIcon icon={faTelegram} fontSize="25px" />
-            <Text ml="2" as="span" fontSize="md">Написать в телеграм</Text>
+            <Text ml="2" as="span" fontSize="md">{t('telegram')}</Text>
         </Link>
     );
 }

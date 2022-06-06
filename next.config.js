@@ -1,10 +1,10 @@
+//const { i18n } = require('./next-i18next.config');
+const nextTranslate = require('next-translate');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // i18n: {
-  //   locales: ['en-US', 'ru'],
-  //   defaultLocale: 'ru',
-  // },
+  ...nextTranslate(),
   images: {
     loader: "default",
     domains: ["localhost"],

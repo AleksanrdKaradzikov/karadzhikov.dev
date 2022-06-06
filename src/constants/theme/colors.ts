@@ -1,7 +1,8 @@
 export const colors = {
     bg: {
         dark: '#162129',
-        light: '#E9ECF1',
+        //light: '#E9ECF1',
+        light: 'white',
         headerBgDark: "rgba(13, 21, 26, 0.78)",
         headerBgLight: "#ffffffd7",
         telegramBg: "#2196f3",

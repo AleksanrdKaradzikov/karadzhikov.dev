@@ -1,14 +1,101 @@
+import { Box, Heading, Text, Tag, TagLabel } from '@chakra-ui/react';
+import Image from 'next/image';
 import { Layout } from "../src/components/Layouts/AnimateLayout";
 import { staticTitles } from '../src/constants/routes';
+
+const skils = ['React', 'Next.js', 'JavaScript', 'SASS/SCSS', 'Redux', 'Git', 'Node.js', 'Express.js'];
 
 const AboutPage = () => {
     return (
         <Layout title={staticTitles.about}>
-            <div>
-                AboutPage
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus ut nostrum architecto! Doloremque error molestiae accusamus culpa repudiandae pariatur voluptatum nam labore. Ipsa dolor incidunt numquam rem veniam autem sapiente atque, quibusdam ut fugiat! Pariatur nisi distinctio, quaerat autem eos molestiae, eligendi veniam nihil quae qui odio accusamus consequuntur doloribus. Id cupiditate nobis ratione amet quos non hic dolor quo sit eveniet, numquam sequi magnam, voluptates similique, commodi pariatur nihil? Modi, dolore non iste ratione, aliquid odio possimus ipsam magni nulla voluptatibus laudantium quibusdam, impedit consequatur officia voluptate ut deleniti velit soluta esse eligendi culpa et. Cum impedit dicta deserunt, molestias qui aperiam. Cupiditate a optio ut tempora excepturi, aut labore dignissimos accusantium explicabo iure maxime dolores laborum eius repellat velit possimus quis! Mollitia saepe quibusdam fugit ab ullam nihil, reiciendis reprehenderit unde corrupti officiis, aspernatur voluptatibus facilis exercitationem nam quia nulla, aut distinctio obcaecati explicabo necessitatibus cupiditate. Architecto placeat ut eum? Nihil minus tempora incidunt. Aspernatur maxime veniam eveniet delectus nostrum ab enim corrupti a quis! Illo accusamus hic, voluptatum inventore maiores fuga consequuntur vero suscipit ut. Illum alias quod ut qui nemo aliquam quidem, assumenda voluptas quisquam totam possimus consequuntur omnis ad neque necessitatibus excepturi? Minima vitae ipsam officia fuga optio asperiores expedita repellat facere nam harum, tenetur quisquam dolor blanditiis maiores repudiandae velit animi deserunt laudantium, amet saepe doloremque odit officiis! Rem, tempora odit expedita itaque odio animi laborum possimus quasi earum omnis magni molestiae deleniti officia cupiditate quidem asperiores illo repudiandae sapiente nisi harum tempore maxime dignissimos qui dicta? Aliquam quod molestiae nam? Obcaecati ipsam voluptate vel dolorum enim corrupti quod ut quas labore vero doloremque officia nostrum aut ab animi voluptas quae modi aspernatur, reprehenderit aperiam sequi consequuntur necessitatibus. Asperiores assumenda error, quas debitis cumque nisi suscipit doloribus, sequi ut vel, eveniet velit culpa ipsam. Architecto vel repellendus tempore placeat, rem iure est id omnis suscipit ullam, vitae excepturi. Fuga nam totam quae fugit, dolore laborum sint. Sequi, harum! Ut mollitia rem ipsum, dicta pariatur fugiat! Eaque qui eveniet vitae laudantium illum totam reiciendis, vel dolores dicta, vero consectetur. Quae, optio veniam obcaecati quas, temporibus rerum dolore magnam non ducimus, soluta blanditiis? Esse quos ipsam, aliquam exercitationem distinctio dolorum praesentium voluptate dolores sapiente magnam vero libero veritatis fugiat saepe perferendis ipsum laboriosam, culpa alias deserunt assumenda deleniti repudiandae eaque! Placeat voluptatum error, sunt, porro non mollitia ex sit eum vero doloremque, dicta nulla libero? Modi non expedita reiciendis incidunt illum. Fuga eaque assumenda voluptas ipsam nihil eveniet laudantium asperiores facere harum porro ipsum tempore ipsa unde, quasi voluptate quae animi velit, consequatur error perspiciatis cupiditate enim! Deleniti mollitia itaque optio a sequi quis facilis, iure accusantium neque nemo minima, aliquam molestias qui expedita, saepe pariatur adipisci sapiente quas officiis cumque ullam minus magnam modi ducimus. Molestiae doloribus consequuntur ipsum ipsa velit praesentium laboriosam. Nesciunt est ipsa similique, consectetur adipisci minima repudiandae aspernatur totam voluptates, magni, nemo voluptatum. Fuga quam hic, accusamus vel laudantium magni ducimus, quisquam esse rem atque illo. Sit aperiam possimus nam aliquam ex fugiat tempora quisquam similique praesentium mollitia dicta aliquid eum nulla earum suscipit provident voluptates placeat, ipsam error. Similique dolore quis repellendus quam perferendis, quasi, veniam, temporibus nobis animi praesentium amet ipsum. Reprehenderit dolores dolorum impedit ipsa illum in debitis explicabo inventore accusantium, praesentium corrupti eveniet eaque adipisci ipsum quibusdam eum repellendus velit deserunt? Fuga rem reiciendis pariatur asperiores mollitia non. Eius facere necessitatibus distinctio molestias quasi sunt, nulla quod delectus adipisci libero a mollitia earum officiis quo, maiores nostrum atque consequuntur quibusdam odit aliquam autem. Porro provident excepturi vel omnis pariatur ipsa error consequatur veritatis, sapiente, autem reprehenderit, dignissimos eius saepe aspernatur totam maiores recusandae minima labore natus deleniti vitae mollitia tempore impedit cupiditate. Corrupti eaque exercitationem similique possimus pariatur nostrum ad consequuntur animi suscipit vel, nesciunt nobis, nihil omnis error dolor, saepe expedita eius fugiat delectus voluptatibus ratione dolores! Nulla architecto aut labore provident fugiat eum, quis minus id culpa totam laudantium autem perspiciatis sed odit illum velit ratione officia quasi sit enim alias iure. Architecto accusantium sed unde eius aut maiores, voluptate possimus mollitia omnis nulla sit harum reprehenderit tenetur perferendis earum libero sequi voluptas! Amet sunt voluptates perspiciatis nesciunt aperiam, enim, laboriosam neque, dolorem provident in tenetur eum eligendi commodi consequatur fuga libero quis voluptatum tempore beatae ipsum eveniet odio? Labore quo laudantium velit dolorem magni ipsa, dignissimos corrupti nemo repudiandae eligendi maxime quis incidunt impedit praesentium inventore, dolor earum quam nobis consequuntur tempore esse illum minus ipsam ullam. Debitis laboriosam quaerat consectetur id, ea aperiam ab delectus voluptatibus assumenda sunt rem! Dicta obcaecati non perferendis corrupti possimus nemo maxime maiores, deserunt molestiae dolorum hic temporibus eligendi, architecto nam illo excepturi quo. Veniam minima magnam atque culpa blanditiis ipsa rerum laboriosam sunt eius hic, earum consequatur obcaecati consectetur pariatur perspiciatis animi magni eum assumenda voluptatum mollitia voluptatibus nesciunt incidunt quisquam deleniti? Quidem reiciendis veniam libero explicabo iste quae placeat esse porro error dicta illum nisi quos, officiis soluta temporibus veritatis fuga atque at sunt distinctio nesciunt. Id blanditiis facere odio aliquam rerum repellat ex. Repellat quam ratione reprehenderit, optio soluta reiciendis ea placeat labore fugiat impedit excepturi possimus porro. Non, repellat libero aspernatur animi atque eos tempora possimus ipsum. Optio alias maxime aspernatur, dolore ducimus rerum ex quod perspiciatis delectus explicabo numquam vitae sint dolorem veniam obcaecati cumque rem cum tenetur. Architecto quis saepe ipsum ullam in aspernatur quisquam. Iusto voluptatem autem blanditiis repudiandae est eveniet odio id obcaecati sit possimus consequatur eos doloremque ab voluptates accusamus quibusdam a corrupti necessitatibus ex, nostrum quas quisquam illum ullam! Nulla ratione modi soluta omnis eum eius voluptates nobis quam, error non laborum accusamus deleniti voluptate, vero odit a aperiam? Hic eveniet voluptate sed sit harum voluptatibus, labore accusamus in reprehenderit aliquid ipsam nulla cum deserunt ex delectus ipsum sint ad est quas consectetur dolore dicta quae libero explicabo. Quibusdam nesciunt voluptatibus inventore, eaque accusantium voluptas adipisci suscipit labore, ducimus possimus a eius reiciendis dicta magnam, at minus architecto consequuntur velit enim porro! Maiores sed quibusdam ipsum vitae aliquid.
-            </div>
-        </Layout>
+            <Box pt="32px">
+                <Heading color="green.400" mb="5" textAlign="center" fontSize="6xl">
+                    Обо мне
+                </Heading>
+                <Box display="flex" justifyContent="center" my="10">
+                    <Image
+                        width={350}
+                        height={350}
+                        src="/images/about.jpg"
+                        style={{
+                            borderRadius: '50%',
+                        }}
+                    />
+                </Box>
+                <Text wordBreak="break-word" fontSize="xl" lineHeight="2rem">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure quidem mollitia dolorem laboriosam minima reprehenderit quas sunt eaque asperiores nesciunt, cum cupiditate labore soluta, eligendi, facilis non pariatur saepe natus debitis distinctio delectus dolorum. Dolore tenetur necessitatibus nihil praesentium nostrum sunt quos repellendus. Amet dolore maxime sunt nostrum minus corrupti.
+                </Text>
+                <Heading color="green.400" my="10">
+                    Навыки
+                </Heading>
+                <Box display="flex" flexWrap="wrap" columnGap="10px" rowGap="5px">
+                    {skils.map((item) => (
+                        <Tag key={item} w="auto" h="40px" fontSize="lg" colorScheme="green" boxShadow="base">
+                            <TagLabel>
+                                {item}
+                            </TagLabel>
+                        </Tag>
+                    ))}
+                </Box>
+                <Text wordBreak="break-word" fontSize="xl" lineHeight="2rem" my="10">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure quidem mollitia dolorem laboriosam minima reprehenderit quas sunt eaque asperiores nesciunt, cum cupiditate labore soluta, eligendi, facilis non pariatur saepe natus debitis distinctio delectus dolorum. Dolore tenetur necessitatibus nihil praesentium nostrum sunt quos repellendus. Amet dolore maxime sunt nostrum minus corrupti.
+                </Text>
+                <Box>
+                    {[...new Array(3)].map((_, idx) => (
+                        <Box
+                            pl="2.5rem"
+                            key={idx}
+                            position="relative"
+                            _before={{
+                                content: '""',
+                                display: "block",
+                                position: 'absolute',
+                                width: '24px',
+                                height: '24px',
+                                borderRadius: "50%",
+                                bg: 'green.400',
+                                top: '8px',
+                                left: 0,
+                            }}
+                            _after={{
+                                content: '""',
+                                display: idx === 2 ? 'none' : "block",
+                                position: 'absolute',
+                                height: "100%",
+                                width: "2px",
+                                top: '12px',
+                                left: '12px',
+                                bg: 'green.400'
+                            }}
+                        >
+                            <Box
+                                display="flex"
+                                justifyContent="space-between"
+                                alignItems="flex-start"
+                                mb="5"
+                            >
+                                <Box>
+                                    <Heading color="green.400" mb="2">
+                                        Luxoft
+                                    </Heading>
+                                    <Text fontSize="xl" fontWeight="600">
+                                        Software Engineer
+                                    </Text>
+                                </Box>
+                                <Box px="5" py="2" borderRadius="6px" bg="green.400" color="white">
+                                    Date here
+                                </Box>
+                            </Box>
+                            <Box pb="10">
+                                <Text fontSize="xl">
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae ex repellat porro ipsa molestias libero impedit obcaecati consequuntur eum quibusdam, ducimus rem? Quae tempora harum delectus nobis, dignissimos eveniet possimus repellendus a aperiam enim obcaecati laudantium non nulla minima adipisci placeat magnam labore veniam quisquam vero debitis perspiciatis suscipit dolorum.
+                                </Text>
+                            </Box>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
+        </Layout >
     );
 }
 

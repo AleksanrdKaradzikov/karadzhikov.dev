@@ -8,9 +8,11 @@ import {
     Link as ChakraLink,
     useColorModeValue,
 } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation'
 import { motion } from 'framer-motion';
 import { ToggleModeButton } from "../ToggleModeButton";
 import { TelegramButton } from "../TelegramButton";
+import { ToggleLanguage } from '../ToggleLanguage';
 import { Logo } from '../Logo';
 import { staticRoutes } from '../../constants/routes';
 
@@ -31,6 +33,7 @@ const motionProps = {
 }
 
 const Navbar = () => {
+    const { t } = useTranslation('common');
     const router = useRouter();
     const headerBg = useColorModeValue('bg.headerBgLight', 'bg.headerBgDark');
 
@@ -58,7 +61,7 @@ const Navbar = () => {
                                     return (
                                         <Link href={path} key={path}>
                                             <ChakraLink variant={variant} ml="2">
-                                                {label}
+                                                {t(label)}
                                             </ChakraLink>
                                         </Link>
                                     );
@@ -68,6 +71,9 @@ const Navbar = () => {
                         <Flex alignItems="center">
                             <Box mr="5" display={["none", "none", "none", "block"]}>
                                 <TelegramButton />
+                            </Box>
+                            <Box mr={5}>
+                                <ToggleLanguage />
                             </Box>
                             <Box>
                                 <ToggleModeButton />
