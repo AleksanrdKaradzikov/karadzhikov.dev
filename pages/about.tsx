@@ -1,13 +1,15 @@
-import { Box, Heading, Text, Tag, TagLabel } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Layout } from "../src/components/Layouts/AnimateLayout";
+import { Skills } from '../src/components/SkillsSection';
 import { staticTitles } from '../src/constants/routes';
 
-const skils = ['React', 'Next.js', 'JavaScript', 'SASS/SCSS', 'Redux', 'Git', 'Node.js', 'Express.js'];
-
 const AboutPage = () => {
+    const { locale } = useRouter();
+
     return (
-        <Layout title={staticTitles.about}>
+        <Layout title={staticTitles(locale as 'ru').about}>
             <Box pt="32px">
                 <Heading color="green.400" mb="5" textAlign="center" fontSize="6xl">
                     Обо мне
@@ -28,15 +30,7 @@ const AboutPage = () => {
                 <Heading color="green.400" my="10">
                     Навыки
                 </Heading>
-                <Box display="flex" flexWrap="wrap" columnGap="10px" rowGap="5px">
-                    {skils.map((item) => (
-                        <Tag key={item} w="auto" h="40px" fontSize="lg" colorScheme="green" boxShadow="base">
-                            <TagLabel>
-                                {item}
-                            </TagLabel>
-                        </Tag>
-                    ))}
-                </Box>
+                <Skills />
                 <Text wordBreak="break-word" fontSize="xl" lineHeight="2rem" my="10">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure quidem mollitia dolorem laboriosam minima reprehenderit quas sunt eaque asperiores nesciunt, cum cupiditate labore soluta, eligendi, facilis non pariatur saepe natus debitis distinctio delectus dolorum. Dolore tenetur necessitatibus nihil praesentium nostrum sunt quos repellendus. Amet dolore maxime sunt nostrum minus corrupti.
                 </Text>

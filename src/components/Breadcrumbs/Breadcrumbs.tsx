@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import {
     Box,
@@ -15,7 +15,6 @@ interface Props {
 
 const Breadcrumbs: FC<Props> = ({ breadcrumbs }) => {
     const bg = useColorModeValue('bg.headerBgLight', 'bg.headerBgDark');
-    const renderBreadcrumbs = useRef(breadcrumbs);
 
     return (
         <Box
@@ -25,7 +24,7 @@ const Breadcrumbs: FC<Props> = ({ breadcrumbs }) => {
             p={{ base: '8px', md: '16px', lg: '16px' }}
         >
             <Breadcrumb separator='/'>
-                {renderBreadcrumbs.current.map(({ label, path, isRoot }) => {
+                {breadcrumbs.map(({ label, path, isRoot }) => {
                     return (
                         <BreadcrumbItem key={label}>
                             {isRoot ? (

@@ -5,6 +5,7 @@ export const styles = {
         return {
             'html, body': {
                 backgroundColor: colorMode === 'dark' ? 'bg.dark' : 'bg.light',
+                scrollBehavior: "smooth",
             },
             '.BlogPagination': {
                 display: 'flex',

@@ -1,8 +1,11 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Heading, Link as ChakraLink, useColorModeValue, Text } from '@chakra-ui/react';
+import { translations } from '../../constants/translations';
 
 const Logo = () => {
+    const { locale } = useRouter();
     const authorNameColor = useColorModeValue('gray.500', 'gray.500');
 
     return (
@@ -12,7 +15,7 @@ const Logo = () => {
                     karardzhikov.dev
                 </Heading>
                 <Text fontSize={["sm", "sm", "md"]} color={authorNameColor}>
-                    александр караджиков
+                    {translations[locale as 'ru'].author.toLocaleLowerCase()}
                 </Text>
             </ChakraLink>
         </Link>

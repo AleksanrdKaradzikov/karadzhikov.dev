@@ -41,7 +41,7 @@ const MainLayout: FC<Props> = ({ children }) => {
                     }}
                     w="100%"
                 >
-                    <Box as="main" flexGrow={1} display="flex" alignItems="stretch">
+                    <Box as="main" flexGrow={1} display="flex" alignItems="stretch" pb="20">
                         <Container maxW="container.xl">
                             {children}
                         </Container>

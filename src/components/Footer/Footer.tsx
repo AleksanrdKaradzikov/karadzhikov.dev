@@ -1,17 +1,20 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import {
-    Grid,
     Box,
-    GridItem,
     Container,
     Text,
     Link,
     Tooltip,
-    useColorMode,
+    Heading,
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTelegram, faVk, faWhatsapp, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { vk, telegram, github } from '../../constants/contacts';
+import { HOME, ABOUT, WORKS } from '../../constants/routes';
+import { WorkFormMe } from './WorkFormMe';
+
+const PAGES = [HOME, ABOUT, WORKS];
 
 const links = [
     {
@@ -45,60 +48,68 @@ const links = [
 ];
 
 const Footer = () => {
-    const { colorMode } = useColorMode();
+    const router = useRouter();
+
+    const isShowWorkMeBlock = PAGES.includes(router.pathname);
 
     return (
         <Box
             as="footer"
-            py="60px"
+            pb="60px"
+            pt={isShowWorkMeBlock ? 0 : '60px'}
             mt="auto"
             minHeight="50px"
             width="100%"
+            bg="bg.footerBg"
+            color="white"
         >
-            <Container maxWidth="container.xl">
-                <Grid
-                    gridTemplateColumns={{
-                        base: '1fr',
-                        md: '1fr',
-                        lg: '1fr 1fr',
-                    }}
-                >
-                    <GridItem
-                        textAlign={{ base: 'center', md: 'center', lg: 'left' }}
-                        mb={{ base: '20px', md: '20px', lg: 0 }}>
-                        <Text>Дизайн и разработка Александра Караджикова</Text>
-                        <Text>
-                            Copyrighting © {new Date().getFullYear()}. Построен с {' '}
-                            <Link
-                                target="blank"
-                                color="teal.500"
-                                href="https://nextjs.org/"
+            {isShowWorkMeBlock && (
+                <WorkFormMe />
+            )}
+            <Container
+                maxW="container.xl"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Heading color="white" mb="10" fontSize="xl" textTransform="uppercase">
+                    Karadzhikov.dev
+                </Heading>
+                <Box display="flex" alignItems="center" mb="10">
+                    {links.map(({ href, icon, lightColor, darkColor, label }) => {
+                        return (
+                            <Box
+                                _hover={{ transform: 'scale(1.2)' }}
+                                // color={colorMode === 'dark' ? darkColor : lightColor}
+                                color="white"
+                                key={label}
+                                transition="transform .3s ease"
+                                fontSize="30px"
+                                ml="5"
                             >
-                                Next.js
-                            </Link>
-                        </Text>
-                    </GridItem>
-                    <GridItem display="flex" justifyContent={{ base: 'center', md: 'center', lg: 'flex-end' }}>
-                        {links.map(({ href, icon, lightColor, darkColor, label }) => {
-                            return (
-                                <Box
-                                    _hover={{ transform: 'scale(1.2)' }}
-                                    color={colorMode === 'dark' ? darkColor : lightColor}
-                                    key={label}
-                                    transition="transform .3s ease"
-                                    fontSize="30px"
-                                    ml="5"
-                                >
-                                    <Tooltip label={label} placement="top">
-                                        <Link href={href} target="blank">
-                                            <FontAwesomeIcon icon={icon} />
-                                        </Link>
-                                    </Tooltip>
-                                </Box>
-                            );
-                        })}
-                    </GridItem>
-                </Grid>
+                                <Tooltip label={label} placement="top" offset={[0, 25]} openDelay={.5}>
+                                    <Link href={href} target="blank">
+                                        <FontAwesomeIcon icon={icon} fontSize="40px" />
+                                    </Link>
+                                </Tooltip>
+                            </Box>
+                        );
+                    })}
+                </Box>
+                <Box textAlign="center" color="gray.300">
+                    <Text>Дизайн и разработка Александра Караджикова</Text>
+                    <Text>
+                        Copyrighting © {new Date().getFullYear()}. Построен с {' '}
+                        <Link
+                            target="blank"
+                            color="teal.500"
+                            href="https://nextjs.org/"
+                        >
+                            Next.js
+                        </Link>
+                    </Text>
+                </Box>
             </Container>
         </Box>
     );

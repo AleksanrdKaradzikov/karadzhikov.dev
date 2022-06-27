@@ -3,6 +3,7 @@ export const colors = {
         dark: '#162129',
         //light: '#E9ECF1',
         light: 'white',
+        footerBg: '#7510F7',
         headerBgDark: "rgba(13, 21, 26, 0.78)",
         headerBgLight: "#ffffffd7",
         telegramBg: "#2196f3",

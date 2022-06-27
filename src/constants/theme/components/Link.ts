@@ -19,7 +19,7 @@ const defaultNavbarProps = {
         position: "absolute",
         display: "block",
         width: "100%",
-        height: "2px",
+        height: "3px",
         transition: "background .3s ease",
         background: "transparent",
         bottom: 0,

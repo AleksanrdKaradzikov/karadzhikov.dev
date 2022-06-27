@@ -21,7 +21,7 @@ const BlogPageLayout: FC<Props> = ({ title, rightContent, leftContent, showBackB
     const router = useRouter();
 
     return (
-        <Box pt="32px">
+        <Box py="32px">
             {showBackBtn && (
                 <Box mb="32px">
                     <BackButton title="Все статьи" onClick={() => router.push('/blog')} />

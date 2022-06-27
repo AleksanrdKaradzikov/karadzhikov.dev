@@ -19,16 +19,18 @@ import { setItemCount, getItemCount } from '../../src/helpers/postVisitiors';
 import { VISITOR_KEY } from '../../src/constants/constants';
 import { useVisitors } from '../../src/hooks/useVisitors';
 
-const staticBreadcrumbs = [
-    {
-        path: HOME,
-        label: mapPathToLabel[HOME],
-    },
-    {
-        path: BLOG,
-        label: mapPathToLabel[BLOG],
-    }
-];
+const staticBreadcrumbs = (locale: 'ru' | 'en') => {
+    return [
+        {
+            path: HOME,
+            label: mapPathToLabel[HOME](locale),
+        },
+        {
+            path: BLOG,
+            label: mapPathToLabel[BLOG](locale),
+        }
+    ];
+};
 
 
 interface Props {
@@ -43,10 +45,10 @@ const ArticlePage: FC<Props> = ({ article, next, prev }) => {
     const refId = useRef('');
     const breadcrumbs = useMemo(() => {
         return [
-            ...staticBreadcrumbs,
+            ...staticBreadcrumbs(router.locale as 'ru' | 'en'),
             { isRoot: true, label: article.title }
         ];
-    }, []);
+    }, [router.locale]);
 
     useEffect(() => {
         if (router.query.id) {

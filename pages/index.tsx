@@ -1,15 +1,20 @@
 import { NextPage } from 'next'
-import Link from 'next/link';
-import { GridItem, Grid, Text, Heading, Img, Box, Link as ChakraLink } from '@chakra-ui/react';
+import { GridItem, Grid, Text, Heading, Img, Box } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation'
 import { Layout } from '../src/components/Layouts/AnimateLayout'
+import { HomePreviewPosts } from '../src/components/HomePreviewPosts';
+import { WorksSection } from '../src/components/WorksSection';
+import { SkillsSection } from '../src/components/SkillsSection';
+import { staticTitles } from '../src/constants/routes';
 import homeAvatar from '../public/images/home-avatar.jpg';
 
 const Home: NextPage = () => {
   const { t } = useTranslation('home');
+  const { locale } = useRouter();
 
   return (
-    <Layout title="Главная">
+    <Layout title={staticTitles(locale as 'ru').home}>
       <Grid
         gap={6}
         templateColumns={{
@@ -17,7 +22,7 @@ const Home: NextPage = () => {
           md: 'repeat(1, 1fr)',
           lg: 'repeat(3, 1fr)'
         }}
-        p="100px 0 160px"
+        py="20"
       >
         <GridItem
           boxShadow='dark-lg'
@@ -71,38 +76,14 @@ const Home: NextPage = () => {
           </Text>
         </GridItem>
       </Grid>
-      <Box id="articles">
-        <Link href="/#articles">
-          <Heading
-            color="green.400"
-            mb="5"
-            cursor="pointer"
-            _hover={{
-              '& .anchorLink': {
-                opacity: '1'
-              }
-            }}
-          >
-            Последние статьи
-            <ChakraLink
-              ml="3"
-              className="anchorLink"
-              opacity="0"
-              _hover={{ textDecoration: 'none' }}
-            >
-              #
-            </ChakraLink>
-          </Heading>
-        </Link>
+      <Box pb="10">
         <Text>
-          Недавние публикации из моего блога, вы так же можете ознакомится с другими {' '}
-          <Link href="/blog">
-            <ChakraLink color="teal.500">
-              статьями
-            </ChakraLink>
-          </Link>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis vitae maiores iste aliquam accusantium, consequatur laudantium iure, eaque odio, pariatur eligendi possimus exercitationem iusto aperiam repudiandae debitis expedita fuga corrupti.
         </Text>
       </Box>
+      <SkillsSection />
+      <WorksSection />
+      <HomePreviewPosts />
     </Layout>
   )
 }

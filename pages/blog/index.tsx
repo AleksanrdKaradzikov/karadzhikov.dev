@@ -18,7 +18,7 @@ interface Props {
 };
 
 export default function BlogPage({ articles, categories, pagination }: Props) {
-    const { isReady, push } = useRouter();
+    const { isReady, push, locale } = useRouter();
 
     useEffect(() => {
         if (isReady && articles.length === 0) {
@@ -51,7 +51,7 @@ export default function BlogPage({ articles, categories, pagination }: Props) {
     );
 
     return (
-        <Layout title={staticTitles.blog}>
+        <Layout title={staticTitles(locale as 'ru').blog}>
             <BlogPageLayout
                 leftContent={leftContent}
                 rightContent={rightContent}

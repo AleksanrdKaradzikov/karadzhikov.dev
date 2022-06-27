@@ -7,7 +7,7 @@ const nextConfig = {
   ...nextTranslate(),
   images: {
     loader: "default",
-    domains: ["localhost"],
+    domains: ["localhost", "evrone.ru"],
   },
 }
 

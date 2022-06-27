@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { useBreakpointValue, Box, useColorModeValue } from '@chakra-ui/react';
 import { fetchAPI } from '../../../src/services/strapiApi';
@@ -7,6 +8,7 @@ import { BlogPageLayout } from '../../../src/components/Layouts/BlogPageLayout';
 import { Category, ArticleToRender } from '../../../src/models';
 import { formatArticlesToRender, formatCategoryToRender } from '../../../src/helpers';
 import { BlogList, TagList } from '../../../src/components/BlogList';
+import { staticTitles } from '../../../src/constants/routes';
 
 interface Props {
     categories: Category[];
@@ -15,6 +17,7 @@ interface Props {
 }
 
 const CategoryPage: FC<Props> = ({ category, categories, articles, }) => {
+    const { locale } = useRouter();
     const mobileTagsShow = useBreakpointValue({ base: true, md: false, lg: false });
     const tagsBlockBg = useColorModeValue('white', 'bg.headerBgDark');
 
@@ -36,7 +39,7 @@ const CategoryPage: FC<Props> = ({ category, categories, articles, }) => {
     );
 
     return (
-        <Layout title={`Статьи с пометкой ${category.name}`}>
+        <Layout title={`${staticTitles(locale as 'ru').category}: ${category.name}`}>
             <BlogPageLayout
                 showBackBtn
                 leftContent={leftContent}
